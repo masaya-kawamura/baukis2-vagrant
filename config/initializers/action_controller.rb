@@ -1,3 +1,3 @@
 Rails.application.configure do
-  config.action.contoroller.permit_all_parameters = true
+  config.action_controller.permit_all_parameters = true
 end
