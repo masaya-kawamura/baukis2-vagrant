@@ -1,4 +1,4 @@
-class Admin::SessionsController < Staff::Base
+class Admin::SessionsController < Admin::Base
   def new
     if current_administrator
       redirect_to :admin_root
@@ -29,7 +29,7 @@ class Admin::SessionsController < Staff::Base
   end
 
   def destroy
-    session.delete(:administrator)
+    session.delete(:administrator_id)
     flash.notice = "ログアウトしました。"
     redirect_to :admin_root
   end
