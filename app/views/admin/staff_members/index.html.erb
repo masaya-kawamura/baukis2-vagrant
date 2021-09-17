@@ -1,0 +1,43 @@
+<% @title = "職員管理" %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to "新規登録", :new_admin_staff_member %>
+  </div>
+
+  <table class="listing">
+    <tr>
+      <th>氏名</th>
+      <th>フリガナ</th>
+      <th>メールアドレス</th>
+      <th>入社日</th>
+      <th>退職日</th>
+      <th>停止フラグ</th>
+      <th>アクション</th>
+    </tr>
+    <% @staff_members.each do |m| %>
+      <tr>
+        <td><%= m.family_name %> <%= m.given_name %></td>
+        <td><%= m.family_name_kana %> <%= m.given_name_kana %>
+        <td class="email"><%= m.email %></td>
+        <!--strftimeメソッドは日時をformat文字列に従って文字列に変換した結果を返す -->
+        <td class="date"><%= m.start_date.strftime("%Y/%m/%d") %>
+        <!-- オブジェクトがnilではない時に引数のメソッドを実行する -->
+        <td class="date"><%= m.end_date.try(:strftime, "%Y/%m/%d") %>
+        <td class="boolean">
+          <!-- 三項演算子で真であればコロンの左側、偽であれば右側の記号（16進数記法）が表示される -->
+          <%= m.suspended? ? raw("&#x2611;") : raw("&#x2610;") %></td>
+        <td class="actions">
+          <%= link_to "編集", [ :edit, :admin, m ] %> |
+          <%= link_to "削除", [ :admin, m ], method: :dalete,
+            data: { confirm: "本当に削除しますか?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <div class="links">
+    <%= link_to "新規登録" %>
+  </div>
+</div>
