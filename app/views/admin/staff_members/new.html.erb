@@ -1,0 +1,14 @@
+<% @title = "職員の新規登録" %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <!-- 送信先のURLを配列で指定する。/admin/staff_membersとなる。-->
+  <%= form_with model: @staff_member, url: [ :admin, @staff_member ] do |f| %>
+    <!-- formという名前の部分テンプレートを挿入する -->
+    <%= render "form", f: f %>
+    <div class="buttons">
+      <%= f.submit "登録" %>
+      <%= link_to "キャンセル", :admin_staff_members %>
+    </div>
+  <% end %>
+</div>
