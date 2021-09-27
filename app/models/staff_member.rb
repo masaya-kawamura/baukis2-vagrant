@@ -1,4 +1,6 @@
 class StaffMember < ApplicationRecord
+  has_many :events, class_name: "StaffEvent", dependent: :destroy
+
   def password=(raw_password)
     #パスワードが文字列な(kind_of?(String))らハッシュ化、それ以外ならnilを返す
     if raw_password.kind_of?(String)
